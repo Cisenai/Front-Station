@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Station - Front Station</title>
+    <link rel="stylesheet" href="css/style3.css">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="music-station.html">Music Station</a></li>
+            <li><a href="quiz-station.html">Quiz Station</a></li>
+            <li><a href="game-station.html">Game Station</a></li>
+        </ul>
+    </nav>
+    <header>
+        <h1>Game Station</h1>
+    </header>
+    <main>
+        <div id="game-container">
+            <canvas id="gameCanvas" width="400" height="400"></canvas>
+        </div>
+    </main>
+
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        let x = 200, y = 200;
+        const speed = 5;
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = 'blue';
+            ctx.fillRect(x, y, 20, 20);
+        }
+
+        function update() {
+            draw();
+            requestAnimationFrame(update);
+        }
+
+        document.addEventListener('keydown', (e) => {
+            switch (e.key) {
+                case 'ArrowUp': y -= speed; break;
+                case 'ArrowDown': y += speed; break;
+                case 'ArrowLeft': x -= speed; break;
+                case 'ArrowRight': x += speed; break;
+            }
+        });
+
+        update();
+    </script>
+</body>
+</html>

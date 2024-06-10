@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Station - Front Station</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="music-station.html">Music Station</a></li>
+            <li><a href="quiz-station.html">Quiz Station</a></li>
+            <li><a href="game-station.html">Game Station</a></li>
+        </ul>
+    </nav>
+    <header>
+        <h1>Quiz Station</h1>
+    </header>
+    <main>
+        <div id="quiz-container">
+            <div id="question-container"></div>
+            <div id="answer-buttons" class="btn-container"></div>
+            <button id="next-btn" class="hide">Próxima</button>
+        </div>
+    </main>
+
+    <script>
+        const questions = [
+            { question: "Quem é considerado o pai da computação?", answers: ["Alan Turing", "Bill Gates", "Steve Jobs", "Charles Babbage"], correct: "Charles Babbage" },
+            // Adicione mais perguntas aqui
+        ];
+
+        const questionContainer = document.getElementById('question-container');
+        const answerButtons = document.getElementById('answer-buttons');
+        const nextButton = document.getElementById('next-btn');
+        let currentQuestionIndex = 0;
+
+        function startQuiz() {
+            currentQuestionIndex = 0;
+            nextButton.classList.add('hide');
+            showQuestion(questions[currentQuestionIndex]);
+        }
+
+        function showQuestion(question) {
+            questionContainer.innerText = question.question;
+            answerButtons.innerHTML = '';
+            question.answers.forEach(answer => {
+                const button = document.createElement('button');
+                button.innerText = answer;
+                button.classList.add('btn');
+                button.addEventListener('click', selectAnswer);
+                answerButtons.appendChild(button);
+            });
+        }
+
+        function selectAnswer(e) {
+            const selectedButton = e.target;
+            const correct = questions[currentQuestionIndex].correct;
+            if (selectedButton.innerText === correct) {
+                alert('Correto!');
+            } else {
+                alert('Errado! A resposta correta é: ' + correct);
+            }
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questions.length) {
+                showQuestion(questions[currentQuestionIndex]);
+            } else {
+                alert('Quiz terminado!');
+            }
+        }
+
+        nextButton.addEventListener('click', () => {
+            currentQuestionIndex++;
+            showQuestion(questions[currentQuestionIndex]);
+        });
+
+        startQuiz();
+    </script>
+</body>
+</html>

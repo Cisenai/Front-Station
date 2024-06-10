@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Station - Front Station</title>
+    <link rel="stylesheet" href="style2.css>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="music-station.html">Music Station</a></li>
+            <li><a href="quiz.html">Quiz Station</a></li>
+            <li><a href="jogos.html">Game Station</a></li>
+        </ul>
+    </nav>
+    <header>
+        <h1>Music Station</h1>
+    </header>
+    <main>
+        <audio id="audio-player" controls>
+            <source id="audio-source" src="music/song1.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+        <div>
+            <button onclick="prevSong()">Anterior</button>
+            <button onclick="nextSong()">Próxima</button>
+        </div>
+        <ul>
+            <li><button onclick="playSong('music/song1.mp3')">Música 1</button></li>
+            <li><button onclick="playSong('music/song2.mp3')">Música 2</button></li>
+            <li><button onclick="playSong('music/song3.mp3')">Música 3</button></li>
+        </ul>
+    </main>
+
+    <script>
+        const songs = ['music/song1.mp3', 'music/song2.mp3', 'music/song3.mp3'];
+        let currentSongIndex = 0;
+
+        function playSong(song) {
+            const audioPlayer = document.getElementById('audio-player');
+            document.getElementById('audio-source').src = song;
+            audioPlayer.load();
+            audioPlayer.play();
+        }
+
+        function prevSong() {
+            currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
+            playSong(songs[currentSongIndex]);
+        }
+
+        function nextSong() {
+            currentSongIndex = (currentSongIndex + 1) % songs.length;
+            playSong(songs[currentSongIndex]);
+        }
+    </script>
+</body>
+</html>
